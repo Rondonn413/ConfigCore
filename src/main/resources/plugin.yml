@@ -1,0 +1,6 @@
+name: ConfigCore
+version: '1.0-SNAPSHOT'
+main: net.joseplay.configCore.ConfigCore
+api-version: '1.21'
+authors: [ joseplay1012 ]
+description: Uma extensão de casamento para o AllianceUtils
