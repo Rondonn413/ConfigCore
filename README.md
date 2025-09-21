@@ -1,5 +1,8 @@
 # ConfigCore - Technical Documentation
 
+#Install
+[![](https://jitpack.io/v/Joseplay1012/ConfigCore.svg)](https://jitpack.io/#Joseplay1012/ConfigCore)
+
 ## Overview
 
 The `AbstractConfig` class defines the foundation for managing
