@@ -1,6 +1,6 @@
 # ConfigCore - Technical Documentation
 
-#Install
+# Install
 [![](https://jitpack.io/v/Joseplay1012/ConfigCore.svg)](https://jitpack.io/#Joseplay1012/ConfigCore)
 
 ## Overview
